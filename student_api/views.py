@@ -173,10 +173,18 @@ def home(request):
 #     serializer_class = StudentSerializer
 
 #!Model View
-
+from .pagination import *
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter, OrderingFilter
 class StudentMVS(ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
+    pagination_class = CustomPageNumberPagination
+    # pagination_class = CustomLimitOffsetPagination
+    # pagination_class = CustomCursorPagination
+    filter_backends = [DjangoFilterBackend, SearchFilter]
+    filterset_fields =['first_name', 'id']
+    search_fields =['first_name', 'id']
     
     @action(detail=False, methods=["GET"])
     def student_count(self, request):

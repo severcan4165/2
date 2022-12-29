@@ -20,7 +20,7 @@ from .models import Student, Path
 #         return instance
 
 class StudentSerializer(serializers.ModelSerializer):
-    born_year = serializers.SerializerMethodField()
+    # born_year = serializers.SerializerMethodField()
     path = serializers.StringRelatedField()
     path_id = serializers.IntegerField()
 
@@ -29,10 +29,10 @@ class StudentSerializer(serializers.ModelSerializer):
         fields = "__all__"
         # exclude = ["number","age", "id"]
     
-    def get_born_year(self,obj):
-        import datetime
-        current_time = datetime.datetime.now()
-        return current_time.year - obj.age
+    # def get_born_year(self,obj):
+    #     import datetime
+    #     current_time = datetime.datetime.now()
+    #     return current_time.year - obj.age
 
 class PathSerializer(serializers.ModelSerializer):
     
