@@ -35,14 +35,15 @@ class StudentSerializer(serializers.ModelSerializer):
         return current_time.year - obj.age
 
 class PathSerializer(serializers.ModelSerializer):
-    # students = StudentSerializer(many=True)
-
-    students = serializers.HyperlinkedRelatedField(
-        many=True,
-        read_only=True,
-        view_name='detail'
-    )
-
+    
+    students = StudentSerializer(many=True)
+    # students = serializers.HyperlinkedRelatedField(
+    #     many=True,
+    #     read_only=True,
+    #     view_name='detail'
+    # )
+    
     class Meta:
         model = Path
+        # fields = "__all__"
         fields = ["id", "path_name", "students"]
